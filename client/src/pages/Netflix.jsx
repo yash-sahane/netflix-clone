@@ -2,7 +2,9 @@ import React from 'react'
 
 const Netflix = () => {
     return (
-        <div>Netflix</div>
+        <div>
+
+        </div>
     )
 }
 
