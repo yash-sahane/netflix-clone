@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { firebaseAuth } from '../utils/firebase-config';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import validator from 'validator';
+import { useNavigate } from 'react-router-dom';
+
 
 const Signup = () => {
     const [passInput, setPassInput] = useState(false);
@@ -6,6 +11,7 @@ const Signup = () => {
         email: '',
         pass: ''
     })
+    const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -15,10 +21,43 @@ const Signup = () => {
         }));
     };
 
-    const signupHandler = () => {
+    const signupHandler = async () => {
         const { email, pass } = details;
 
+        if (!validator.isEmail(email)) {
+            toast.error('Invalid Email', {
+                position: "top-center",
+                autoClose: 5000,
+                theme: "dark",
+            });
+            return;
+        }
+
+        if (!validator.isLength(pass, { min: 8 })) {
+            toast.error('Password must be at least 8 characters long!', {
+                position: "top-center",
+                autoClose: 5000,
+                theme: "dark",
+            });
+            return;
+        }
+        try {
+            await createUserWithEmailAndPassword(firebaseAuth, email, pass);
+        } catch (e) {
+            console.log(e);
+            toast.error(e.message);
+        }
     }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
+            if (currentUser) navigate('/');
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, [navigate]);
 
     useEffect(() => {
         console.log(details);
