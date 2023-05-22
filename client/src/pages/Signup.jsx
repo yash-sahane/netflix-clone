@@ -3,9 +3,9 @@ import { firebaseAuth } from '../utils/firebase-config';
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import validator from 'validator';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-
-const Signup = () => {
+const Signup = ({ setIsLoggedIn }) => {
     const [passInput, setPassInput] = useState(false);
     const [details, setDetails] = useState({
         email: '',
@@ -43,6 +43,7 @@ const Signup = () => {
         }
         try {
             await createUserWithEmailAndPassword(firebaseAuth, email, pass);
+            setIsLoggedIn(true);
         } catch (e) {
             console.log(e);
             toast.error(e.message);
@@ -51,7 +52,9 @@ const Signup = () => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
-            if (currentUser) navigate('/');
+            if (currentUser) {
+                navigate('/');
+            }
         });
 
         return () => {

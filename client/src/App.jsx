@@ -7,12 +7,14 @@ import './app.css'
 
 const App = () => {
   const [loginPage, setLoginPage] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
-      <Nav loginPage={loginPage} setLoginPage={setLoginPage} />
+      <Nav loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
-        <Route exact path='/login' element={<Login loginPage={loginPage} setLoginPage={setLoginPage} />} />
-        <Route exact path='/signup' element={<Signup loginPage={loginPage} setLoginPage={setLoginPage} />} />
+        <Route exact path='/login' element={<Login loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route exact path='/signup' element={<Signup loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route exact path='/' element={<Netflix />} />
       </Routes>
       <ToastContainer
