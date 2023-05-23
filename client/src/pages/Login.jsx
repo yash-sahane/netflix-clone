@@ -4,8 +4,9 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import validator from 'validator';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Header from '../components/Header';
 
-const Signup = ({ setIsLoggedIn }) => {
+const Signup = ({ setIsLoggedIn, updateLoginStatus }) => {
     const [details, setDetails] = useState({
         email: '',
         pass: ''
@@ -31,9 +32,11 @@ const Signup = ({ setIsLoggedIn }) => {
             });
             return;
         }
+
         try {
             await signInWithEmailAndPassword(firebaseAuth, email, pass);
             setIsLoggedIn(true);
+            updateLoginStatus(true);
         } catch (error) {
             if (error.code === 'auth/user-not-found') {
                 toast.error('User not found');
