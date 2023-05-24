@@ -4,10 +4,12 @@ import { Login, Netflix, Signup } from './pages/index';
 import { Nav } from './components/index'
 import { ToastContainer } from 'react-toastify';
 import './app.css'
+import Player from './pages/Player';
 
 const App = () => {
   const [loginPage, setLoginPage] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn');
@@ -21,13 +23,18 @@ const App = () => {
     localStorage.setItem('isLoggedIn', JSON.stringify(status));
   };
 
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  }
+
   return (
     <Router>
-      <Nav loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} />
       <Routes>
         <Route exact path='/login' element={<Login loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} />} />
         <Route exact path='/signup' element={<Signup loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} />} />
-        <Route exact path='/' element={<Netflix />} />
+        <Route exact path='/' element={<Netflix loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} isScrolled={isScrolled} />} />
+        <Route exact path='/player' element={<Player />} />
       </Routes>
       <ToastContainer
         position="top-center"

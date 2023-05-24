@@ -6,7 +6,7 @@ import validator from 'validator';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const Signup = ({ setIsLoggedIn, updateLoginStatus }) => {
+const Signup = ({ loginPage, setLoginPage, setIsLoggedIn, updateLoginStatus }) => {
     const [passInput, setPassInput] = useState(false);
     const [details, setDetails] = useState({
         email: '',
@@ -70,6 +70,7 @@ const Signup = ({ setIsLoggedIn, updateLoginStatus }) => {
 
     return (
         <>
+            <Header loginPage={loginPage} setLoginPage={setLoginPage} />
             <div className=" text-white flex flex-col items-center justify-center text-center px-5 sm:px-10 md:px-24 lg:px-32 xl:px-40 h-screen w-screen">
                 <div
                     className="bg-opacity-90 absolute top-0 left-0 w-full h-full -z-10"
