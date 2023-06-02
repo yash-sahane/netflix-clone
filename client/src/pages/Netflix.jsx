@@ -3,10 +3,14 @@ import { Nav } from '../components'
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '../utils/firebase-config';
+import { useDispatch, useSelector } from 'react-redux'
 import { FaPlay, FaExclamation } from 'react-icons/fa';
+import { getGenres, getMovies } from '../store';
 
 const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const genresLoaded = useSelector(state => state.netflix.genresLoaded);
 
     const playHandler = () => {
         navigate('/player');
@@ -23,6 +27,14 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
             unsubscribe();
         };
     }, [navigate]);
+
+    useEffect(() => {
+        dispatch(getGenres());
+    }, []);
+
+    useEffect(() => {
+        if (genresLoaded) dispatch(getMovies({ type: 'all' }));
+    })
 
     return (
         <>

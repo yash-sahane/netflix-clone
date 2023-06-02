@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login, Netflix, Signup } from './pages/index';
-import { Nav } from './components/index'
 import { ToastContainer } from 'react-toastify';
 import './app.css'
 import Player from './pages/Player';
