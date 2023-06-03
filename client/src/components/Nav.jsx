@@ -31,7 +31,7 @@ const Nav = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
     };
 
     return (
-        <div className={`${isScrolled ? 'bg-black' : 'bg-transparent'} text-white h-24 md:h-24 w-screen flex justify-between items-center px-0 pr-5 sm:px-12 top-0 left-0`}>
+        <div className={`${isScrolled ? 'bg-black' : 'bg-transparent'} text-white h-24  md:h-24 w-full flex justify-between items-center px-0 pr-5 sm:px-12 top-0 left-0 sticky z-10`}>
             <div className='h-full w-full flex flex-col md:flex-row items-center gap-5'>
                 <img src="../../src/assets/logo.png" alt="" className='h-20' />
                 <div className='flex gap-4'>
