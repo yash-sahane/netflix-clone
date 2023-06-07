@@ -7,7 +7,7 @@ const CardSlider = ({ title, data }) => {
     const listRef = useRef();
 
     return (
-        <div className="flex flex-col gap-4 relative py-4" onMouseEnter={() => setShowControls(true)} onMouseLeave={() => setShowControls(false)}>
+        <div className="flex flex-col gap-4 relative" onMouseEnter={() => setShowControls(true)} onMouseLeave={() => setShowControls(false)}>
             <h1 className="ml-[50px]">{title}</h1>
             <div className="flex justify-center items-center">
                 <div className={`${!showControls && 'opacity-0'}`}>

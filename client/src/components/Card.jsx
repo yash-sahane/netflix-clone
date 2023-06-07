@@ -9,9 +9,9 @@ const Card = ({ movie }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="relative" onMouseEnter={() => setIsHovered(true)}
+        <div className="relative bg-gray-600" onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
-            <div className="w-[230px] cursor-pointer rounded-lg shadow-lg" >
+            <div className="w-[250px] cursor-pointer rounded-lg shadow-lg p-10" >
                 <img
                     src={`https://image.tmdb.org/t/p/w500${image}`}
                     alt="movie"
@@ -19,7 +19,7 @@ const Card = ({ movie }) => {
                 />
             </div>
             {isHovered && (
-                <div className="absolute -top-16 left-0 z-50 transform scale-125">
+                <div className="absolute -top-16 left-0 z-50 transform scale-110">
                     <video
                         src="../../src/assets/video.mp4"
                         autoPlay
