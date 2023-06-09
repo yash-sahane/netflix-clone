@@ -19,7 +19,9 @@ const Slider = ({ movies }) => {
         <>
             {cardSlider.map(cardData => {
                 const { id, title, data } = cardData;
-                return <CardSlider key={id} title={title} data={data} />
+                return <div key={id} className=''>
+                    <CardSlider title={title} data={data} />
+                </div>
             })}
         </>
     );
