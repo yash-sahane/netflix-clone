@@ -14,6 +14,7 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
     const genresLoaded = useSelector(state => state.netflix.genresLoaded);
     const movies = useSelector(state => state.netflix.movies);
 
+
     const playHandler = () => {
         navigate('/player');
     }
@@ -57,7 +58,9 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
                     </div>
                 </div>
             </div>
-            <Slider movies={movies} />
+            <div className='bg-[#111011] py-3'>
+                <Slider movies={movies} />
+            </div>
         </>
     )
 }

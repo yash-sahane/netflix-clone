@@ -48,11 +48,13 @@ const Card = ({ movie }) => {
 
     return (
         <div
-            className={`z-50 ${isHovered ? 'scale-x-110 scale-y-95' : ''}`}
+            className={`relative transition-transform duration-300 ${isHovered ? 'scale-x-[1.40] scale-y-[1.35]' : ''
+                }`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            style={{ zIndex: isHovered ? '100' : '1' }}
         >
-            <div className="w-64 cursor-pointer rounded-lg shadow-lg z-[100]">
+            <div className="w-64 cursor-pointer rounded-lg shadow-lg">
                 <img
                     src={`https://image.tmdb.org/t/p/w500${image}`}
                     alt="movie"
@@ -60,20 +62,16 @@ const Card = ({ movie }) => {
                 />
             </div>
             {isHovered && (
-                <div className="absolute -top-16 left-0 z-50 transition-transform duration-300">
+                <div className="absolute -top-16 left-0 right-0 z-[100]">
                     <video
                         src="../../src/assets/video.mp4"
                         autoPlay
                         loop
                         muted
                         onClick={handleCardClick}
-                        className=""
                     />
                     <div className="bg-gray-900 p-4">
-                        <h3
-                            onClick={handleCardClick}
-                            className="text-white text-md font-medium cursor-pointer"
-                        >
+                        <h3 onClick={handleCardClick} className="text-white text-sm font-medium cursor-pointer">
                             {name}
                         </h3>
                         <div className="flex justify-between items-center text-white mt-2">
@@ -116,9 +114,13 @@ const Card = ({ movie }) => {
                             </div>
                         </div>
                         <div>
-                            <ul className="mt-2 text-white">
-                                {movie.genres.map((genre) => (
-                                    <li key={genre.id}>{genre}</li>
+                            <ul className="flex flex-wrap gap-6 mt-2 text-white">
+                                {movie.genres.map((genre, index) => (
+                                    <li className='text-xs'
+                                        key={genre.id}
+                                        style={{ listStyleType: index === 0 ? 'none' : 'disc' }}>
+                                        {genre}
+                                    </li>
                                 ))}
                             </ul>
                         </div>

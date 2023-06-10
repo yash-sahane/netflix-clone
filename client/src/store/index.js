@@ -14,8 +14,8 @@ const createArrayFromRawData = (array, moviesArray, genres) => {
   array.map((movie) => {
     const movieGenres = [];
     movie.genre_ids.map((genre) => {
-      const name = genres.find((id) => id === genre);
-      if (name) movieGenres.push(name.name);
+      const genreData = genres.find((item) => item.id === genre);
+      if (genreData) movieGenres.push(genreData.name);
     });
     if (movie.backdrop_path) {
       moviesArray.push({
