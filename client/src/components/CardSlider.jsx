@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Card from './Card';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
@@ -16,20 +16,22 @@ const CardSlider = ({ title, data }) => {
     };
 
     const handleDirection = (direction) => {
-        let distance = listRef.current.getBoundingClientRect().x - 70;
         if (direction === 'left' && sliderPosition > 0) {
-            listRef.current.style.transform = `translateX(${230 + distance}px)`;
-            setSliderPosition(sliderPosition - 1);
+            setSliderPosition((prevPosition) => prevPosition - 1);
         }
         if (direction === 'right' && sliderPosition < 4) {
-            listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-            setSliderPosition(sliderPosition + 1);
+            setSliderPosition((prevPosition) => prevPosition + 1);
         }
     };
 
+    useEffect(() => {
+        const distance = sliderPosition * 250;
+        listRef.current.style.transform = `translateX(-${distance}px)`;
+    }, [sliderPosition]);
+
     return (
         <div
-            className="flex flex-col gap-4 w-max translate-x-0 py-8"
+            className={`flex flex-col gap-4 w-max translate-x-0 py-10 transition-all duration-300 bg-[#111011] relative z-[0] hover:z-[10]`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -41,7 +43,7 @@ const CardSlider = ({ title, data }) => {
                 >
                     <FaAngleLeft className="text-4xl text-white" />
                 </div>
-                <div className="flex w-max gap-4 translate-x-0 ml-10" ref={listRef}>
+                <div className="flex w-max gap-4 translate-x-0 ml-10 mr-10" ref={listRef}>
                     {data && data.map((movie) => <Card key={movie.name} movie={movie} />)}
                 </div>
                 <div

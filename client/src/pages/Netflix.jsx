@@ -58,7 +58,7 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
                     </div>
                 </div>
             </div>
-            <div className='bg-[#111011] py-3'>
+            <div className='bg-[#111011] pb-16'>
                 <Slider movies={movies} />
             </div>
         </>
