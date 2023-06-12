@@ -14,7 +14,6 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
     const genresLoaded = useSelector(state => state.netflix.genresLoaded);
     const movies = useSelector(state => state.netflix.movies);
 
-
     const playHandler = () => {
         navigate('/player');
     }
@@ -35,9 +34,9 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
         dispatch(getGenres());
     }, []);
 
-    useEffect(() => {
-        if (genresLoaded) dispatch(getMovies({ type: 'all' }));
-    }, [genresLoaded]);
+    // useEffect(() => {
+    //     if (genresLoaded) dispatch(getMovies({ type: 'all' }));
+    // }, [genresLoaded]);
 
     return (
         <>

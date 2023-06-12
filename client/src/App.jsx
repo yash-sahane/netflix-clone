@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import './app.css'
 import Player from './pages/Player';
 import Movies from './pages/Movies';
+import TVShows from './pages/TVShows';
 
 const App = () => {
   const [loginPage, setLoginPage] = useState(true);
@@ -35,6 +36,7 @@ const App = () => {
         <Route exact path='/signup' element={<Signup loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} />} />
         <Route exact path='/' element={<Netflix loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} isScrolled={isScrolled} />} />
         <Route exact path='/movies' element={<Movies loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} isScrolled={isScrolled} />} />
+        <Route exact path='/tv' element={<TVShows loginPage={loginPage} setLoginPage={setLoginPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateLoginStatus={updateLoginStatus} isScrolled={isScrolled} />} />
         <Route exact path='/player' element={<Player />} />
       </Routes>
       <ToastContainer

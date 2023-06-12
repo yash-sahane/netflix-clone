@@ -10,7 +10,7 @@ import Slider from '../components/Slider';
 import NotAvailable from '../components/NotAvailable';
 import SelectGenre from '../components/SelectGenre';
 
-const Movies = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
+const TVShows = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const genresLoaded = useSelector(state => state.netflix.genresLoaded);
@@ -34,7 +34,7 @@ const Movies = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
     }, []);
 
     useEffect(() => {
-        if (genresLoaded) dispatch(getMovies({ type: 'movie' }));
+        if (genresLoaded) dispatch(getMovies({ type: 'tv' }));
     }, [genresLoaded]);
 
     useEffect(() => {
@@ -52,4 +52,4 @@ const Movies = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
     )
 }
 
-export default Movies
+export default TVShows

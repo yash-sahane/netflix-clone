@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getMoviesByGenres } from '../store';
 
-const SelectGenre = ({ genres }) => {
+const SelectGenre = ({ genres, type }) => {
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedGenre, setSelectedGenre] = useState(null);
 
     const handleSelectToggle = () => {
         setIsOpen(!isOpen);
+    };
+
+    const handleGenreSelect = (genre) => {
+        const { name } = genre;
+        console.log('Selected Genre:', genre);
+        setSelectedGenre(genre);
+        dispatch(getMoviesByGenres({ genre: genre.id, type: type }));
+        setIsOpen(false);
     };
 
     return (
@@ -16,11 +28,10 @@ const SelectGenre = ({ genres }) => {
                 <div className="flex justify-between">
                     <div>
                         <span className="mr-2">Genre:</span>
-                        <span className="font-medium">Select Genre</span>
+                        <span className="font-medium">{selectedGenre ? selectedGenre.name : 'Select Genre'}</span>
                     </div>
                     <svg
-                        className={`w-4 h-4 ml-2 transition-transform duration-300 transform ${isOpen ? 'rotate-180' : ''
-                            }`}
+                        className={`w-4 h-4 ml-2 transition-transform duration-300 transform ${isOpen ? 'rotate-180' : ''}`}
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -41,6 +52,7 @@ const SelectGenre = ({ genres }) => {
                     <li
                         key={genre.id}
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleGenreSelect(genre)}
                     >
                         {genre.name}
                     </li>
