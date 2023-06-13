@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaPlay, FaThumbsUp, FaThumbsDown, FaCheck, FaPlus, FaChevronDown } from 'react-icons/fa';
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from '../utils/firebase-config';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Card = ({ movie }) => {
     const { name, image } = movie;
     const [isHovered, setIsHovered] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
+    const [email, setEmail] = useState(null);
     const navigate = useNavigate();
+    const server = import.meta.env.VITE_SERVER
+
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+        if (currentUser) setEmail(currentUser.email);
+        else navigate('/login');
+    })
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -24,16 +35,39 @@ const Card = ({ movie }) => {
         navigate('/player');
     };
 
-    const handleLikeClick = () => {
-        // Handle like button click
+    const handleLikeClick = async () => {
+
     };
 
     const handleDislikeClick = () => {
-        // Handle dislike button click
     };
 
-    const handleAddToListClick = () => {
-        // Handle add to list button click
+    const handleAddToListClick = async () => {
+        try {
+            const { data } = await axios.post(`${server}/user/add`, { email, data: movie });
+            if (data.success === 'false') {
+                toast.error(data.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    theme: "dark",
+                });
+                console.log(data);
+                return
+            }
+            toast.success(data.message, {
+                position: "top-center",
+                autoClose: 5000,
+                theme: "dark",
+            });
+            console.log(data);
+        } catch (e) {
+            console.log(e);
+            toast.error(e, {
+                position: "top-center",
+                autoClose: 5000,
+                theme: "dark",
+            });
+        }
         setIsLiked(true);
     };
 

@@ -11,7 +11,7 @@ config({
 
 app.use(express.json());
 app.use(cors());
-app.use('/users', userRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
     res.send('Index page');

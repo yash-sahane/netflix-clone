@@ -34,9 +34,9 @@ const Netflix = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => 
         dispatch(getGenres());
     }, []);
 
-    // useEffect(() => {
-    //     if (genresLoaded) dispatch(getMovies({ type: 'all' }));
-    // }, [genresLoaded]);
+    useEffect(() => {
+        if (genresLoaded) dispatch(getMovies({ type: 'all' }));
+    }, [genresLoaded]);
 
     return (
         <>
