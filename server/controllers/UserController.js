@@ -23,7 +23,7 @@ export const addToLikedMovies = async (req, res) => {
         }
         return res.json({ message: "Movie added successfully" });
     } catch(e) {
-        return res.json({ message: "Something went wrong" });
+        return res.json({ message: e.message });
     } 
 }
 
@@ -37,9 +37,9 @@ export const getMyList = async (req, res) => {
                 movies : user.likedMovies
             })
         } else {
-            return res.json({ message: "User not found" });
+            return res.json({ success : false, message: "User not found" });
         }
     } catch (e) {
-        return res.json({success : 'false'})
+        return res.json({success : 'false', message : "Something went wrong" });
     }
 }

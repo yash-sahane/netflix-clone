@@ -9,7 +9,7 @@ const Nav = ({ loginPage, setLoginPage, updateLoginStatus, isScrolled }) => {
         { id: 1, name: 'Home', link: '/' },
         { id: 2, name: 'TV Shows', link: '/tv' },
         { id: 3, name: 'Movies', link: '/movies' },
-        { id: 4, name: 'My List', link: '/mylist' }
+        // { id: 4, name: 'My List', link: '/mylist' }
     ]
 
     const [showInput, setShowInput] = useState(false);

@@ -16,18 +16,18 @@ const CardSlider = ({ title, data }) => {
     };
 
     const handleDirection = (direction) => {
-        if (direction === 'left' && sliderPosition > 0) {
-            setSliderPosition((prevPosition) => prevPosition - 1);
+
+        let distance = listRef.current.getBoundingClientRect().x - 70;
+
+        if (direction === "left" && sliderPosition > 0) {
+            listRef.current.style.transform = `translateX(${230 + distance}px)`;
+            setSliderPosition(sliderPosition - 1);
         }
-        if (direction === 'right' && sliderPosition < 4) {
-            setSliderPosition((prevPosition) => prevPosition + 1);
+        if (direction === "right" && sliderPosition < 4) {
+            listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+            setSliderPosition(sliderPosition + 1);
         }
     };
-
-    useEffect(() => {
-        const distance = sliderPosition * 250;
-        listRef.current.style.transform = `translateX(-${distance}px)`;
-    }, [sliderPosition]);
 
     return (
         <div
